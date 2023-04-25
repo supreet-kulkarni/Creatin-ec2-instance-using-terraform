@@ -17,14 +17,23 @@ resource "aws_instance" "web_server" {
   key_name = "TerraKey"
   user_data = <<EOF
                      #!/bin/bash
-                     sudo su
-                     curl --location https://rpm.nodesource.com/setup_16.x | bash -
-                     yum -y install nodejs
-                     yum -y install git
-                     git clone https://github.com/supreet-kulkarni/Sample-Node-APP.git
-                     cd /Sample-Node-APP
-                     npm install
-                     npm start
+                     sudo su 
+                    apt update
+                    apt install apache2 -y
+                    wget http://prdownloads.sourceforge.net/awstats/awstats-7.3.tar.gz
+                    tar -xvzf awstats-7.3.tar.gz
+                    cd awstats-7.3/
+                    cd wwwroot/
+                    cp -r icon /var/www/html/
+                    chown www-data:www-data -R /var/www/html/icon/
+                    a2enmod cgi
+                    service apache2 restart
+                    mv cgi-bin awstat
+                    chown www-data:www-data -R awstat
+                    mv awstat /usr/lib/cgi-bin
+                    cd /usr/lib/cgi-bin/awstat
+                    cp awstats.model.conf awstats.linux.conf
+
             EOF
  tags = {
     Name = "Webserver"
