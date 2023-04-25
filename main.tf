@@ -15,7 +15,7 @@ resource "aws_instance" "web_server" {
   instance_type = "t2.micro"
   availability_zone = "ap-south-1a"
   key_name = "TerraKey"
-  user_data = <<EOF
+  user_data = <<-EOF
                      #!/bin/bash
                      sudo su 
                      apt update
