@@ -33,8 +33,7 @@ resource "aws_instance" "web_server" {
                      mv awstat /usr/lib/cgi-bin
                      cd /usr/lib/cgi-bin/awstat
                      cp awstats.model.conf awstats.linux.conf
-
-            EOF
+              EOF
  tags = {
     Name = "Webserver"
   }
