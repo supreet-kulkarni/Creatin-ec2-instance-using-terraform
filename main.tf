@@ -19,7 +19,3 @@ resource "aws_instance" "test" {
   }
 }
 
-resource "aws_ec2_instance_state" "test" {
-  instance_id = aws_instance.test.id
-  state       = "stopped"
-}
