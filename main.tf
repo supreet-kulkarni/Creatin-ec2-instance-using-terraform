@@ -10,7 +10,16 @@ terraform {
 provider "aws" {
     region = "ap-south-1"  
 }
-resource "aws_ec2_instance_state" "webserver" {
-  instance_id ="i-0d1844b2be410822c"
+resource "aws_instance" "test" {
+  ami           ="ami-062df10d14676e201"
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "Webapp"
+  }
+}
+
+resource "aws_ec2_instance_state" "test" {
+  instance_id = aws_instance.test.id
   state       = "stopped"
 }
