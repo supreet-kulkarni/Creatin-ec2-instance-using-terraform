@@ -10,18 +10,7 @@ terraform {
 provider "aws" {
     region = "ap-south-1"  
 }
-resource "aws_instance" "web_server" {
-  ami           = "ami-062df10d14676e201"
-  instance_type = "t2.micro"
-  availability_zone = "ap-south-1a"
-  key_name = "TerraKey"
- 
- tags = {
-    Name = "Webserver"
-  }
+resource "aws_ec2_instance_state" "webserver" {
+  instance_id ="i-0d1844b2be410822c"
+  state       = "stopped"
 }
-
-output "instance_ip_address" {
-  value = aws_instance.web_server.public_ip
-}
-
